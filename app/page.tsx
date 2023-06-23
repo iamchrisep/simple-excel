@@ -66,18 +66,29 @@ export default function Home () {
         }
     }
 
+    const handleChange = (event: { target: HTMLInputElement }, i: number, j: number) => {
+        if (matrix) {
+            const newMatrix = structuredClone(matrix)
+            const newValue = Math.max(MIN, Math.min(MAX, Number(event.target.value)))
+            newMatrix[i][j] = newValue
+            setMatrix(newMatrix)
+        }
+    }
+
+    const handleFocus = (event: { target: HTMLInputElement }) => event.target.select()
+
     useEffect(() => {
         const filledMatrix = getFilledMatrix(n)
         setMatrix(filledMatrix)
     }, [])
 
     return (
-        <main className="flex h-screen flex-col p-24">
+        <main className="flex h-screen flex-col p-24 text-sm">
             <div className="flex justify-between items-center mb-12">
                 <div className="inline-flex" role="group">
                     <button
                         type="button"
-                        className="inline-flex items-center px-4 py-2 text-sm font-medium text-emerald-700 bg-transparent border border-emerald-700 rounded-l-lg hover:bg-emerald-700 hover:text-white focus:z-10 focus:ring-2 focus:ring-emerald-500 focus:bg-emerald-700 focus:text-white"
+                        className="inline-flex items-center px-4 py-2 font-medium text-emerald-700 bg-transparent border border-emerald-700 rounded-l-lg hover:bg-emerald-700 hover:text-white focus:z-10 focus:ring-2 focus:ring-emerald-500 focus:bg-emerald-700 focus:text-white"
                         onClick={() => increaseMatrix()}
                     >
                         <svg aria-hidden="true" className="w-3 h-3 mr-2 fill-current" fill="currentColor"
@@ -89,7 +100,7 @@ export default function Home () {
                     </button>
                     <button
                         type="button"
-                        className="inline-flex items-center px-4 py-2 text-sm font-medium text-emerald-700 bg-transparent border-t border-b border-emerald-700 hover:bg-emerald-700 hover:text-white focus:z-10 focus:ring-2 focus:ring-emerald-500 focus:bg-emerald-700 focus:text-white"
+                        className="inline-flex items-center px-4 py-2 font-medium text-emerald-700 bg-transparent border-t border-b border-emerald-700 hover:bg-emerald-700 hover:text-white focus:z-10 focus:ring-2 focus:ring-emerald-500 focus:bg-emerald-700 focus:text-white"
                         onClick={() => resetMatrix()}
                     >
                         <svg aria-hidden="true" className="w-3 h-3 mr-2 fill-current" fill="currentColor"
@@ -101,7 +112,7 @@ export default function Home () {
                     </button>
                     <button
                         type="button"
-                        className="inline-flex items-center px-4 py-2 text-sm font-medium text-emerald-700 bg-transparent border border-emerald-700 rounded-r-lg hover:bg-emerald-700 hover:text-white focus:z-10 focus:ring-2 focus:ring-emerald-500 focus:bg-emerald-700 focus:text-white"
+                        className="inline-flex items-center px-4 py-2 font-medium text-emerald-700 bg-transparent border border-emerald-700 rounded-r-lg hover:bg-emerald-700 hover:text-white focus:z-10 focus:ring-2 focus:ring-emerald-500 focus:bg-emerald-700 focus:text-white"
                         onClick={() => reduceMatrix()}
                     >
                         <svg aria-hidden="true" className="w-3 h-3 mr-2 fill-current" fill="currentColor"
@@ -114,7 +125,7 @@ export default function Home () {
                 </div>
                 <button
                     type="button"
-                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-emerald-700 bg-transparent border border-emerald-700 rounded-lg hover:bg-emerald-700 hover:text-white focus:z-10 focus:ring-2 focus:ring-emerald-500 focus:bg-emerald-700 focus:text-white"
+                    className="inline-flex items-center px-4 py-2 font-medium text-emerald-700 bg-transparent border border-emerald-700 rounded-lg hover:bg-emerald-700 hover:text-white focus:z-10 focus:ring-2 focus:ring-emerald-500 focus:bg-emerald-700 focus:text-white"
                     onClick={() => exportToXLSX()}
                 >
                     <svg aria-hidden="true" className="w-3 h-3 mr-2 fill-current" fill="currentColor"
@@ -134,12 +145,21 @@ export default function Home () {
                                 key={`r${i}`}
                                 className={i % 2 ? 'bg-white' : 'bg-neutral-50'}
                             >
-                                {row.map((col, y) => (
+                                {row.map((col, j) => (
                                     <td
-                                        key={`r${i}c${y}`}
-                                        className="px-6 py-4 border"
+                                        key={`r${i}c${j}`}
+                                        className="border"
                                     >
-                                        {col}
+                                        <input
+                                            type="number"
+                                            className="!border-0 !ring-0 !outline-0 bg-transparent block w-full h-full p-2.5"
+                                            required
+                                            min={MIN}
+                                            max={MAX}
+                                            value={col}
+                                            onChange={(e) => handleChange(e, i, j)}
+                                            onFocus={(e) => handleFocus(e)}
+                                        />
                                     </td>
                                 ))}
                                 <td className="px-6 py-4 border bg-neutral-100">

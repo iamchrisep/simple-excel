@@ -152,7 +152,7 @@ export default function Home () {
                                     >
                                         <input
                                             type="number"
-                                            className="!border-0 !ring-0 !outline-0 bg-transparent block w-full h-full p-2.5"
+                                            className="!border-0 !ring-0 !outline-0 bg-transparent flex h-full px-4 py-3"
                                             required
                                             min={MIN}
                                             max={MAX}
@@ -162,7 +162,7 @@ export default function Home () {
                                         />
                                     </td>
                                 ))}
-                                <td className="px-6 py-4 border bg-neutral-100">
+                                <td className="px-4 py-3 border bg-neutral-100">
                                     {row.reduce((acc, curVal) => {
                                         return acc + curVal
                                     }, 0)}
@@ -171,7 +171,7 @@ export default function Home () {
                         ))}
                         <tr className="text-right">
                             <td
-                                className="px-6 py-4 border bg-neutral-100"
+                                className="px-4 py-3 border bg-neutral-100"
                                 colSpan={n + 1}
                             >
                             {matrix && matrix.reduce((acc, curVal) => acc.concat(curVal), []).reduce((acc, curVal) => {

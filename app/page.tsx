@@ -84,23 +84,36 @@ export default function Home () {
 
     return (
         <main className="flex h-screen flex-col p-24 text-sm">
-            <div className="flex justify-between items-center mb-12">
-                <div className="inline-flex" role="group">
+            <h4 className="text-2xl font-bold">Matrix {n} &times; {n}</h4>
+            <div className="flex justify-between items-center mt-6 mb-12">
+                <div className="flex items-stretch gap-24">
+                    <div className="flex" role="group">
+                        <button
+                            type="button"
+                            className="inline-flex items-center px-4 py-2 font-medium text-emerald-700 bg-transparent border border-emerald-700 rounded-l-lg hover:bg-emerald-700 hover:text-white focus:z-10 focus:ring-2 focus:ring-emerald-500 focus:bg-emerald-700 focus:text-white"
+                            onClick={() => increaseMatrix()}
+                        >
+                            <svg aria-hidden="true" className="w-3 h-3 fill-current" fill="currentColor"
+                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
+                                      strokeWidth="2" d="M9 1v16M1 9h16"/>
+                            </svg>
+                        </button>
+                        <button
+                            type="button"
+                            className="inline-flex items-center px-4 py-2 font-medium text-emerald-700 bg-transparent border border-l-0 border-emerald-700 rounded-r-lg hover:bg-emerald-700 hover:text-white focus:z-10 focus:ring-2 focus:ring-emerald-500 focus:bg-emerald-700 focus:text-white"
+                            onClick={() => reduceMatrix()}
+                        >
+                            <svg aria-hidden="true" className="w-3 h-3 fill-current" fill="currentColor"
+                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 2">
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
+                                      strokeWidth="2" d="M1 1h16"/>
+                            </svg>
+                        </button>
+                    </div>
                     <button
                         type="button"
-                        className="inline-flex items-center px-4 py-2 font-medium text-emerald-700 bg-transparent border border-emerald-700 rounded-l-lg hover:bg-emerald-700 hover:text-white focus:z-10 focus:ring-2 focus:ring-emerald-500 focus:bg-emerald-700 focus:text-white"
-                        onClick={() => increaseMatrix()}
-                    >
-                        <svg aria-hidden="true" className="w-3 h-3 mr-2 fill-current" fill="currentColor"
-                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
-                            <path
-                                d="M18 .989a1.016 1.016 0 0 0-.056-.277c-.011-.034-.009-.073-.023-.1a.786.786 0 0 0-.066-.1.979.979 0 0 0-.156-.224l-.007-.01a.873.873 0 0 0-.116-.073.985.985 0 0 0-.2-.128.959.959 0 0 0-.231-.047A.925.925 0 0 0 17 0h-4a1 1 0 1 0 0 2h1.664l-3.388 3.552a1 1 0 0 0 1.448 1.381L16 3.5V5a1 1 0 0 0 2 0V.989ZM17 12a1 1 0 0 0-1 1v1.586l-3.293-3.293a1 1 0 0 0-1.414 1.414L14.586 16H13a1 1 0 0 0 0 2h4a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1ZM3.414 2H5a1 1 0 0 0 0-2H1a1 1 0 0 0-1 1v4a1 1 0 0 0 2 0V3.414l3.536 3.535A1 1 0 0 0 6.95 5.535L3.414 2Zm2.139 9.276L2 14.665V13a1 1 0 1 0-2 0v4c.006.046.015.09.027.135.006.08.022.16.048.235a.954.954 0 0 0 .128.2.95.95 0 0 0 .073.117l.01.007A.983.983 0 0 0 1 18h4a1 1 0 0 0 0-2H3.5l3.436-3.276a1 1 0 0 0-1.38-1.448h-.003Z"/>
-                        </svg>
-                        Increase
-                    </button>
-                    <button
-                        type="button"
-                        className="inline-flex items-center px-4 py-2 font-medium text-emerald-700 bg-transparent border-t border-b border-emerald-700 hover:bg-emerald-700 hover:text-white focus:z-10 focus:ring-2 focus:ring-emerald-500 focus:bg-emerald-700 focus:text-white"
+                        className="inline-flex items-center px-4 py-2 font-medium text-emerald-700 bg-transparent border border-emerald-700 rounded-lg hover:bg-emerald-700 hover:text-white focus:z-10 focus:ring-2 focus:ring-emerald-500 focus:bg-emerald-700 focus:text-white"
                         onClick={() => resetMatrix()}
                     >
                         <svg aria-hidden="true" className="w-3 h-3 mr-2 fill-current" fill="currentColor"
@@ -109,18 +122,6 @@ export default function Home () {
                                 d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z"/>
                         </svg>
                         Reset
-                    </button>
-                    <button
-                        type="button"
-                        className="inline-flex items-center px-4 py-2 font-medium text-emerald-700 bg-transparent border border-emerald-700 rounded-r-lg hover:bg-emerald-700 hover:text-white focus:z-10 focus:ring-2 focus:ring-emerald-500 focus:bg-emerald-700 focus:text-white"
-                        onClick={() => reduceMatrix()}
-                    >
-                        <svg aria-hidden="true" className="w-3 h-3 mr-2 fill-current" fill="currentColor"
-                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path
-                                d="M7 1a1 1 0 0 0-1 1v2.586L2.707 1.293a1 1 0 0 0-1.414 1.414L4.586 6H2a1 1 0 0 0 0 2h5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Zm0 11H2a1 1 0 1 0 0 2h2.586l-3.293 3.293a1 1 0 1 0 1.414 1.414L6 15.414V18a1 1 0 1 0 2 0v-5a1 1 0 0 0-1-1Zm11-6h-2.586l3.293-3.293a1 1 0 1 0-1.414-1.414L14 4.586V2a1 1 0 0 0-2 0v5a1 1 0 0 0 1 1h5a1 1 0 1 0 0-2Zm1 7a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v5a1 1 0 1 0 2 0v-2.586l3.293 3.293a1 1 0 0 0 1.414-1.414L15.414 14H18a1 1 0 0 0 1-1Z"/>
-                        </svg>
-                        Reduce
                     </button>
                 </div>
                 <button
